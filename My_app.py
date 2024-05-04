@@ -42,8 +42,11 @@ def gram_to_mol_calculator():
     st.title('Gramm in mol umrechnen')
     mass = st.number_input('Masse')
     molar_mass = st.number_input('Molare Masse (g/mol)')
-    result = mass / molar_mass
-    st.write('Das Ergebnis beträgt:', result, 'mol')
+    if molar_mass != 0:  # Überprüfen, ob die molare Masse nicht Null ist
+        result = mass / molar_mass
+        st.write('Das Ergebnis beträgt:', result, 'mol')
+    else:
+        st.write('Die molare Masse kann nicht Null sein.')
 
 # Funktion für die Berechnung der Reaktionsenthalpie
 def reaction_enthalpy_calculator():
@@ -115,3 +118,4 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
+
