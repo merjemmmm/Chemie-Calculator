@@ -117,3 +117,21 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
+
+# Funktion für die Berechnung der theoretischen Ausbeute
+def yield_calculator():
+    st.title('Theoretische Ausbeute')
+    st.write('Die theoretische Ausbeute ist die Menge eines Produkts, die entstehen würde, wenn die Reaktion zu 100 % effizient wäre.')
+
+    # Eingabefelder für Masse des Produkts und molare Masse des Produkts
+    mass_product = st.number_input('Masse des Produkts (g)', min_value=0.0, step=0.01)
+    molar_mass_product = st.number_input('Molare Masse des Produkts (g/mol)', min_value=0.0, step=0.01)
+
+    # Überprüfen, ob sowohl Masse als auch molare Masse des Produkts eingegeben wurden
+    if mass_product != 0 and molar_mass_product != 0:
+        # Berechnung der theoretischen Ausbeute
+        theoretical_yield = mass_product / molar_mass_product
+        st.write('Die theoretische Ausbeute beträgt:', theoretical_yield, 'mol')
+    else:
+        st.write('Bitte geben Sie sowohl die Masse als auch die molare Masse des Produkts ein.')
+
