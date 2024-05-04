@@ -1,4 +1,5 @@
 import streamlit as st
+import math
 
 # Funktion für die Startseite der App
 def homepage():
@@ -18,7 +19,7 @@ def homepage():
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
         ph_calculator()
- 
+
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
     st.title('Stoffmenge ausrechnen')
@@ -48,7 +49,7 @@ def gram_to_mol_calculator():
 def yield_calculator():
     st.title('Theoretische Ausbeute')
     # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
- 
+
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
     st.title('Konzentration berechnen')
@@ -84,9 +85,23 @@ def ph_calculator():
         acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'H3PO4'])
         concentration = st.number_input('Konzentration der Säure (mol/L)')
         if concentration != 0:
-            ph = -1 * (st.math.log10(concentration))
+            ph = -1 * math.log10(concentration)
             st.write('Der pH-Wert beträgt:', round(ph, 2))
             st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
         else:
-            st.write
+            st.write('Bitte geben Sie die Konzentration der Säure ein.')
+    elif solution_property == 'Konzentration einer Base':
+        base = st.selectbox('Base wählen', ['NaOH', 'KOH', 'Ca(OH)2', 'NH3'])
+        concentration = st.number_input('Konzentration der Base (mol/L)')
+        if concentration != 0:
+            poh = -1 * math.log10(concentration)
+            ph = 14 - poh
+            st.write('Der pH-Wert beträgt:', round(ph, 2))
+            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
+        else:
+            st.write('Bitte geben Sie die Konzentration der Base ein.')
+
+# Aufruf der Homepage-Funktion, um die App zu starten
+homepage()
+
 
