@@ -1,6 +1,3 @@
-Es tut mir leid für die Verwirrung. Es sieht so aus, als ob es ein Problem mit dem Radio-Button gibt. Um dieses Problem zu beheben, können wir die Art und Weise ändern, wie der Radio-Button erstellt wird. Hier ist der überarbeitete Code:
-
-```python
 import streamlit as st
 
 # Funktion für die Startseite der App
@@ -104,6 +101,3 @@ def main():
 # Ausführen der Hauptfunktion
 if __name__ == "__main__":
     main()
-```
-
-In diesem überarbeiteten Code haben wir den Radio-Button durch ein Dropdown-Menü ersetzt, um das Problem mit dem Absturz zu beheben. Jetzt sollte das Dropdown-Menü ordnungsgemäß funktionieren.
