@@ -1,6 +1,5 @@
 import streamlit as st
-import math
-
+ 
 # Funktion für die Startseite der App
 def homepage():
     st.title('Herzlich willkommen auf unserer App - Chemie Calculator')
@@ -19,7 +18,7 @@ def homepage():
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
         ph_calculator()
-
+ 
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
     st.title('Stoffmenge ausrechnen')
@@ -36,7 +35,7 @@ def molar_calculator():
         st.write('Das Ergebnis beträgt:', result, 'mol')
     else:
         st.write('Die Masse und die molare Masse können nicht Null sein.')
-
+ 
 # Funktion für den Gramm-zu-Mol-Umrechner
 def gram_to_mol_calculator():
     st.title('Gramm in mol umrechnen')
@@ -44,12 +43,12 @@ def gram_to_mol_calculator():
     molar_mass = st.number_input('Molare Masse (g/mol)')
     result = mass / molar_mass
     st.write('Das Ergebnis beträgt:', result, 'mol')
-
+ 
 # Funktion für die Berechnung der theoretischen Ausbeute
 def yield_calculator():
     st.title('Theoretische Ausbeute')
     # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
-
+ 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
     st.title('Konzentration berechnen')
@@ -73,13 +72,31 @@ def concentration_calculator():
                 st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
     else:
         st.write('Die Stoffmenge und das Volumen der Lösung können nicht Null sein.')
-
+ 
 # Funktion für den pH-Rechner
 def ph_calculator():
     st.title('pH-Rechner')
     st.markdown("""
     Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
     """)
-
+    solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
+    if solution_property == 'Konzentration einer Säure':
+        acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'CH3COOH'])
+        concentration = st.number_input('Konzentration der Säure (mol/L)')
+        if concentration != 0:
+            ph = -1 * st.math.log10(concentration)
+            st.write('Der pH-Wert beträgt:', ph)
+        else:
+            st.write('Bitte geben Sie die Konzentration der Säure ein.')
+    elif solution_property == 'Konzentration einer Base':
+        base = st.selectbox('Base wählen', ['NaOH', 'KOH', 'NH4OH'])
+        concentration = st.number_input('Konzentration der Base (mol/L)')
+        if concentration != 0:
+            poh = -1 * st.math.log10(concentration)
+            ph = 14 - poh
+            st.write('Der pH-Wert beträgt:', ph)
+        else:
+            st.write('Bitte geben Sie die Konzentration der Base ein.')
+ 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
