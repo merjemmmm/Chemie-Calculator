@@ -3,7 +3,7 @@ import math
 
 # Funktion für die Startseite der App
 def homepage():
-    st.title('Herzlich willkommen auf unserer App - Chemie Calculator')
+    st.title('Herzlich Willkommen auf unserer App - Chemie Calculator')
     st.subheader("🧪 Chemie Calculator")
     st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie Labor zu berechnen.')
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
