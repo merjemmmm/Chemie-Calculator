@@ -30,7 +30,7 @@ def login_page():
 # Funktion für die Sign-up-Seite
 def signup_page():
     st.title('Sign-up')
-    gender = st.radio('Anrede', ['Männlich', 'Weiblich'])
+    gender = st.selectbox('Anrede', ['Männlich', 'Weiblich'])
     first_name = st.text_input('Vorname')
     last_name = st.text_input('Nachname')
     email = st.text_input('E-Mail')
@@ -101,5 +101,3 @@ def main():
 # Ausführen der Hauptfunktion
 if __name__ == "__main__":
     main()
-
-
