@@ -30,30 +30,16 @@ def molar_calculator():
     mass = st.number_input('Masse')
     molar_mass = st.number_input('Molare Masse (g/mol)')
     
-    if mass_unit == 'Milligramm':
-        mass /= 1000  # Umrechnung von Milligramm in Gramm
+    if molar_mass != 0:  # Überprüfen, ob die molare Masse nicht Null ist
+        if mass_unit == 'Milligramm':
+            mass /= 1000  # Umrechnung von Milligramm in Gramm
 
-    result = mass / molar_mass
-    st.write('Das Ergebnis beträgt:', result, 'mol')
+        result = mass / molar_mass
+        st.write('Das Ergebnis beträgt:', result, 'mol')
+    else:
+        st.write('Die molare Masse kann nicht Null sein.')
 
-# Funktion für den Gramm-zu-Mol-Umrechner
-def gram_to_mol_calculator():
-    st.title('Gramm in mol umrechnen')
-    mass = st.number_input('Masse')
-    molar_mass = st.number_input('Molare Masse (g/mol)')
-    
-    result = mass / molar_mass
-    st.write('Das Ergebnis beträgt:', result, 'mol')
-
-# Funktion für den pH-Wert-Rechner
-def ph_calculator():
-    st.title('pH-Wert Rechner')
-    # Hier kann die Logik für den pH-Wert-Rechner implementiert werden
-
-# Funktion für die Berechnung der theoretischen Ausbeute
-def yield_calculator():
-    st.title('Theoretische Ausbeute')
-    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+# Weitere Funktionen für die anderen Rechner werden hier implementiert
 
 # Hauptfunktion für die Streamlit-Anwendung
 def main():
@@ -62,3 +48,4 @@ def main():
 # Ausführen der Hauptfunktion
 if __name__ == "__main__":
     main()
+
