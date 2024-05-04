@@ -51,8 +51,8 @@ def yield_calculator():
     st.markdown("""
     Die theoretische Ausbeute ist die maximale Menge eines Produkts, die bei einer Reaktion erhalten werden kann, wenn alle Reaktanten vollständig in das Produkt umgewandelt werden, unter der Annahme, dass keine Nebenreaktionen oder Produktverluste auftreten. Wählen Sie die Reaktanten und Produkte aus, um die theoretische Ausbeute zu berechnen.
     """)
-    reactants = st.multiselect('Reaktanten', ['Reaktant 1', 'Reaktant 2', 'Reaktant 3'])
-    products = st.multiselect('Produkte', ['Produkt 1', 'Produkt 2', 'Produkt 3'])
+    reactants = st.multiselect('Reaktanten auswählen', ['Reaktant A', 'Reaktant B', 'Reaktant C'])
+    products = st.multiselect('Produkte auswählen', ['Produkt X', 'Produkt Y', 'Produkt Z'])
     if reactants and products:
         st.write('Ausgewählte Reaktanten:', reactants)
         st.write('Ausgewählte Produkte:', products)
@@ -113,5 +113,4 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
-
 
