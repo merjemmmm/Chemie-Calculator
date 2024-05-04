@@ -8,9 +8,9 @@ def homepage():
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
 
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Konzentration berechnen'])
+    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge Mol Calculator', 'Gramm in mol', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Konzentration berechnen'])
 
-    if selected_option == 'Stoffmenge ausrechnen':
+    if selected_option == 'Stoffmenge Mol Calculator':
         molar_calculator()
     elif selected_option == 'Gramm in mol umrechnen':
         gram_to_mol_calculator()
@@ -23,7 +23,7 @@ def homepage():
 
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
-    st.title('Stoffmenge ausrechnen')
+    st.title('Stoffmenge Mol Calculator')
     st.markdown("""
     Die Stoffmenge (auch Mol genannt) ist eine grundlegende Größe in der Chemie, die die Anzahl der Teilchen in einer Substanz angibt. Ein Mol entspricht etwa 6,022 x 10^23 Teilchen, was als Avogadro-Konstante bekannt ist. Um die Stoffmenge auszurechnen, müssen Sie die Masse der Substanz und ihre molare Masse kennen. Wählen Sie die Einheit für die Masse und geben Sie dann die Masse und die molare Masse ein, um die Stoffmenge zu berechnen.
     """)
@@ -43,7 +43,7 @@ def molar_calculator():
 
 # Funktion für den Gramm-zu-Mol-Umrechner
 def gram_to_mol_calculator():
-    st.title('Gramm in mol umrechnen')
+    st.title('Gramm in mol')
     mass = st.number_input('Masse')
     molar_mass = st.number_input('Molare Masse (g/mol)')
     
