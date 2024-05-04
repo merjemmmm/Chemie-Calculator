@@ -64,24 +64,4 @@ def concentration_calculator():
             concentration = substance_amount / solution_volume
             st.write('Die Konzentration beträgt:', concentration, 'mol/L')
         elif concentration_unit == 'Gramm pro Liter (g/L)':
-            # Hier benötigen Sie die molare Masse des gelösten Stoffs, um von Mol auf Gramm umzurechnen
-            molar_mass = st.number_input('Molare Masse des gelösten Stoffs (g/mol)')
-            if molar_mass != 0:
-                concentration = (substance_amount * molar_mass) / solution_volume
-                st.write('Die Konzentration beträgt:', concentration, 'g/L')
-            else:
-                st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
-    else:
-        st.write('Die Stoffmenge und das Volumen der Lösung können nicht Null sein.')
-
-# Funktion für den pH-Rechner
-def ph_calculator():
-    st.title('pH-Rechner')
-    st.markdown("""
-    Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
-    """)
-    solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
-    if solution_property == 'Konzentration einer Säure':
-        acid = st.selectbox('S
-
-
+            # Hier benötigen Sie die molare Masse des gelösten Stoffs, um von Mol auf Gramm um
