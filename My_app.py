@@ -62,12 +62,14 @@ def concentration_calculator():
         if concentration_unit == 'Mol pro Liter (mol/L)':
             concentration = substance_amount / solution_volume
             st.write('Die Konzentration beträgt:', concentration, 'mol/L')
+            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')  # H+ Konzentration
         elif concentration_unit == 'Gramm pro Liter (g/L)':
             # Hier benötigen Sie die molare Masse des gelösten Stoffs, um von Mol auf Gramm umzurechnen
             molar_mass = st.number_input('Molare Masse des gelösten Stoffs (g/mol)')
             if molar_mass != 0:
                 concentration = (substance_amount * molar_mass) / solution_volume
                 st.write('Die Konzentration beträgt:', concentration, 'g/L')
+                st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')  # H+ Konzentration
             else:
                 st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
     else:
@@ -77,9 +79,9 @@ def concentration_calculator():
 def ph_calculator():
     st.title('pH-Rechner')
     st.markdown("""
-    Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
+    Der pH-Wert ist ein Maß für die Säure oder Base einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist, und wird auf einer Skala von 0 bis 14 gemessen. Ein pH-Wert unter 7 zeigt eine saure Lösung an, während ein pH-Wert über 7 eine basische Lösung anzeigt. Ein pH-Wert von 7 ist neutral, was bedeutet, dass die Lösung weder sauer noch basisch ist.
     """)
-    solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
+    solution_property = st.selectbox('Eigenschaft der Lösung', ['Konzentration einer Säure', 'Konzentration einer Base'])
     if solution_property == 'Konzentration einer Säure':
         acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'H3PO4'])
         concentration = st.number_input('Konzentration der Säure (mol/L)')
@@ -102,3 +104,5 @@ def ph_calculator():
  
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
+
+
