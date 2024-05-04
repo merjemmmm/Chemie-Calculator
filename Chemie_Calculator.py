@@ -8,7 +8,7 @@ def homepage():
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
 
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge Mol Calculator', 'Gramm in mol', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Konzentration berechnen'])
+    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge Mol Calculator', 'Gramm in mol', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Stoffmengenkonzentration c'])
 
     if selected_option == 'Stoffmenge Mol Calculator':
         molar_calculator()
@@ -62,7 +62,7 @@ def yield_calculator():
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
-    st.title('Konzentration berechnen')
+    st.title('Stoffmengenkonzentration c')
     st.markdown("""
     Die Konzentration (c) einer Lösung kann berechnet werden, indem die Stoffmenge (n) durch das Volumen (V) der Lösung geteilt wird. 
     """)
