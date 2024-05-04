@@ -81,20 +81,22 @@ def ph_calculator():
     """)
     solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
     if solution_property == 'Konzentration einer Säure':
-        acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'CH3COOH'])
+        acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'H3PO4'])
         concentration = st.number_input('Konzentration der Säure (mol/L)')
         if concentration != 0:
-            ph = -1 * st.math.log10(concentration)
-            st.write('Der pH-Wert beträgt:', ph)
+            ph = -1 * (st.math("log10({})".format(concentration)))
+            st.write('Der pH-Wert beträgt:', round(ph, 2))
+            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
         else:
             st.write('Bitte geben Sie die Konzentration der Säure ein.')
     elif solution_property == 'Konzentration einer Base':
-        base = st.selectbox('Base wählen', ['NaOH', 'KOH', 'NH4OH'])
+        base = st.selectbox('Base wählen', ['NaOH', 'KOH', 'Ca(OH)2', 'NH3'])
         concentration = st.number_input('Konzentration der Base (mol/L)')
         if concentration != 0:
-            poh = -1 * st.math.log10(concentration)
+            poh = -1 * (st.math("log10({})".format(concentration)))
             ph = 14 - poh
-            st.write('Der pH-Wert beträgt:', ph)
+            st.write('Der pH-Wert beträgt:', round(ph, 2))
+            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
         else:
             st.write('Bitte geben Sie die Konzentration der Base ein.')
  
