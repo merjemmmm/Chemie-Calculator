@@ -72,17 +72,11 @@ def concentration_calculator():
                 st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
     else:
         st.write('Die Stoffmenge und das Volumen der Lösung können nicht Null sein.')
-
 # Funktion für den pH-Rechner
-
 def ph_calculator():
-
     st.title('pH-Rechner')
-
     st.markdown("""
-
     Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
-
     """)
 
     solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
