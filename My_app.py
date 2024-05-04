@@ -80,5 +80,7 @@ def ph_calculator():
     st.markdown("""
     Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
     """)
-    sol
+
+# Aufruf der Homepage-Funktion, um die App zu starten
+homepage()
 
