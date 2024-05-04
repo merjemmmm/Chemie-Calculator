@@ -56,7 +56,7 @@ def yield_calculator():
     # Eingabefelder für Masse, molare Masse, Stoffmenge und Stöchiometrie
     mass_product = st.number_input('Masse des Produkts (g)', min_value=0.0, step=0.01)
     molar_mass_product = st.number_input('Molare Masse des Produkts (g/mol)', min_value=0.0, step=0.01)
-    stoichiometry = st.number_input('Stöchiometrie des Produkts', min_value=0.0, step=1)
+    stoichiometry = st.number_input('Stöchiometrie des Produkts', min_value=0.0, step=1, value=1.0)
     stoffmenge_limiting = st.number_input('Stoffmenge des limitierenden Reagenzes (mol)', min_value=0.0, step=0.01)
  
     # Berechnung der theoretischen Ausbeute
