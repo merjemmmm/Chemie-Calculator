@@ -8,13 +8,13 @@ def homepage():
     st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie Labor zu berechnen.')
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'Theoretische Ausbeute', 'Konzentration berechnen', 'pH-Rechner'])
+    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'Reaktionsenthalpie berechnen', 'Konzentration berechnen', 'pH-Rechner'])
     if selected_option == 'Stoffmenge ausrechnen':
         molar_calculator()
     elif selected_option == 'Gramm in mol umrechnen':
         gram_to_mol_calculator()
-    elif selected_option == 'Theoretische Ausbeute':
-        yield_calculator()
+    elif selected_option == 'Reaktionsenthalpie berechnen':
+        reaction_enthalpy_calculator()
     elif selected_option == 'Konzentration berechnen':
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
@@ -45,10 +45,22 @@ def gram_to_mol_calculator():
     result = mass / molar_mass
     st.write('Das Ergebnis beträgt:', result, 'mol')
 
-# Funktion für die Berechnung der theoretischen Ausbeute
-def yield_calculator():
-    st.title('Theoretische Ausbeute')
-    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+# Funktion für die Berechnung der Reaktionsenthalpie
+def reaction_enthalpy_calculator():
+    st.title('Reaktionsenthalpie berechnen')
+    st.markdown("""
+    Die Reaktionsenthalpie ist die Energiemenge, die bei einer chemischen Reaktion absorbiert oder freigesetzt wird. Sie wird oft in Kilojoule pro Mol (kJ/mol) gemessen. Geben Sie die enthalpischen Werte der beteiligten Stoffe ein und wählen Sie die Art der Reaktion (exotherm oder endotherm), um die Reaktionsenthalpie zu berechnen.
+    """)
+    substance1 = st.text_input('Name des ersten Stoffes')
+    enthalpy1 = st.number_input('Enthalpie des ersten Stoffes (kJ/mol)')
+    substance2 = st.text_input('Name des zweiten Stoffes')
+    enthalpy2 = st.number_input('Enthalpie des zweiten Stoffes (kJ/mol)')
+    reaction_type = st.radio('Art der Reaktion', ['Exotherm', 'Endotherm'])
+    if reaction_type == 'Exotherm':
+        reaction_enthalpy = enthalpy1 + enthalpy2
+    else:
+        reaction_enthalpy = enthalpy1 - enthalpy2
+    st.write('Die Reaktionsenthalpie beträgt:', reaction_enthalpy, 'kJ/mol')
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
