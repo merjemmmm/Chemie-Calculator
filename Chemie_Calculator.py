@@ -8,7 +8,7 @@ def homepage():
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
 
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'pH-Wert Rechner', 'Theoretische Ausbeute'])
+    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Konzentration berechnen'])
 
     if selected_option == 'Stoffmenge ausrechnen':
         molar_calculator()
@@ -18,6 +18,8 @@ def homepage():
         ph_calculator()
     elif selected_option == 'Theoretische Ausbeute':
         yield_calculator()
+    elif selected_option == 'Konzentration berechnen':
+        concentration_calculator()
 
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
@@ -39,7 +41,43 @@ def molar_calculator():
     else:
         st.write('Die molare Masse kann nicht Null sein.')
 
-# Weitere Funktionen für die anderen Rechner werden hier implementiert
+# Funktion für den Gramm-zu-Mol-Umrechner
+def gram_to_mol_calculator():
+    st.title('Gramm in mol umrechnen')
+    mass = st.number_input('Masse')
+    molar_mass = st.number_input('Molare Masse (g/mol)')
+    
+    result = mass / molar_mass
+    st.write('Das Ergebnis beträgt:', result, 'mol')
+
+# Funktion für den pH-Wert-Rechner
+def ph_calculator():
+    st.title('pH-Wert Rechner')
+    # Hier kann die Logik für den pH-Wert-Rechner implementiert werden
+
+# Funktion für die Berechnung der theoretischen Ausbeute
+def yield_calculator():
+    st.title('Theoretische Ausbeute')
+    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+
+# Funktion für die Berechnung der Konzentration
+def concentration_calculator():
+    st.title('Konzentration berechnen')
+    st.markdown("""
+    Die Konzentration (c) einer Lösung kann berechnet werden, indem die Stoffmenge (n) durch das Volumen (V) der Lösung geteilt wird. 
+    """)
+
+    st.write('Geben Sie die Stoffmenge (in mol) ein:')
+    n = st.number_input('Stoffmenge')
+
+    st.write('Geben Sie das Volumen (in Liter) ein:')
+    V = st.number_input('Volumen')
+
+    if V != 0:  # Überprüfen, ob das Volumen nicht Null ist
+        c = n / V
+        st.write('Die Konzentration beträgt:', c, 'mol/L')
+    else:
+        st.write('Das Volumen kann nicht Null sein.')
 
 # Hauptfunktion für die Streamlit-Anwendung
 def main():
@@ -48,4 +86,3 @@ def main():
 # Ausführen der Hauptfunktion
 if __name__ == "__main__":
     main()
-
