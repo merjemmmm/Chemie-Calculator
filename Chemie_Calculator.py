@@ -54,45 +54,19 @@ def gram_to_mol_calculator():
 def ph_calculator():
     st.title('pH-Wert Rechner')
     st.markdown("""
-    Der pH-Wert ist ein Maß für die Konzentration der Wasserstoffionen in einer Lösung. Er wird auf einer Skala von 0 bis 14 gemessen, wobei 7 neutral ist, Werte unter 7 als sauer gelten und Werte über 7 als basisch. Geben Sie die Konzentration der Wasserstoffionen in der Lösung ein, um den pH-Wert zu berechnen.
+    Der pH-Wert ist ein Maß für die Konzentration der Wasserstoffionen in einer Lösung. Er wird auf einer Skala von 0 bis 14 gemessen, wobei 7 neutral ist, Werte unter 7 als sauer gelten und Werte über 7 als basisch. Wählen Sie die Art der Lösung (sauer oder basisch), geben Sie die Konzentration der Säure oder Base ein und klicken Sie auf "pH-Wert berechnen".
     """)
-
-    hydrogen_ion_concentration = st.number_input('Konzentration der Wasserstoffionen (in mol/L)')
     
-    if hydrogen_ion_concentration != 0:  # Überprüfen, ob die Konzentration der Wasserstoffionen nicht Null ist
-        ph_value = -1 * st.math.log10(hydrogen_ion_concentration)
-        st.write('Der pH-Wert beträgt:', ph_value)
-    else:
-        st.write('Die Konzentration der Wasserstoffionen kann nicht Null sein.')
+    solution_type = st.radio('Art der Lösung', ['Sauer', 'Basisch'])
 
-# Funktion für die Berechnung der theoretischen Ausbeute
-def yield_calculator():
-    st.title('Theoretische Ausbeute')
-    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+    if solution_type == 'Sauer':
+        acid_type = st.selectbox('Wählen Sie die Art der Säure', ['HCl', 'H2SO4', 'HNO3'])  # Hier können die wichtigsten Säuren hinzugefügt werden
+        acid_concentration = st.number_input('Konzentration der Säure (in mol/L)')
 
-# Funktion für die Berechnung der Konzentration
-def concentration_calculator():
-    st.title('Konzentration berechnen')
-    st.markdown("""
-    Die Konzentration (c) einer Lösung kann berechnet werden, indem die Stoffmenge (n) durch das Volumen (V) der Lösung geteilt wird. 
-    """)
-
-    st.write('Geben Sie die Stoffmenge (in mol) ein:')
-    n = st.number_input('Stoffmenge')
-
-    st.write('Geben Sie das Volumen (in Liter) ein:')
-    V = st.number_input('Volumen')
-
-    if V != 0:  # Überprüfen, ob das Volumen nicht Null ist
-        c = n / V
-        st.write('Die Konzentration beträgt:', c, 'mol/L')
-    else:
-        st.write('Das Volumen kann nicht Null sein.')
-
-# Hauptfunktion für die Streamlit-Anwendung
-def main():
-    homepage()
-
-# Ausführen der Hauptfunktion
-if __name__ == "__main__":
-    main()
+        if acid_concentration != 0:  # Überprüfen, ob die Konzentration der Säure nicht Null ist
+            if acid_type == 'HCl':
+                h_concentration = acid_concentration
+            elif acid_type == 'H2SO4':
+                h_concentration = 2 * acid_concentration
+            elif acid_type == 'HNO3':
+                h_concentration
