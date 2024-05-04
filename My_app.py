@@ -1,5 +1,6 @@
 import streamlit as st
- 
+import math
+
 # Funktion für die Startseite der App
 def homepage():
     st.title('Herzlich willkommen auf unserer App - Chemie Calculator')
@@ -18,7 +19,7 @@ def homepage():
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
         ph_calculator()
- 
+
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
     st.title('Stoffmenge ausrechnen')
@@ -35,7 +36,7 @@ def molar_calculator():
         st.write('Das Ergebnis beträgt:', result, 'mol')
     else:
         st.write('Die Masse und die molare Masse können nicht Null sein.')
- 
+
 # Funktion für den Gramm-zu-Mol-Umrechner
 def gram_to_mol_calculator():
     st.title('Gramm in mol umrechnen')
@@ -43,12 +44,12 @@ def gram_to_mol_calculator():
     molar_mass = st.number_input('Molare Masse (g/mol)')
     result = mass / molar_mass
     st.write('Das Ergebnis beträgt:', result, 'mol')
- 
+
 # Funktion für die Berechnung der theoretischen Ausbeute
 def yield_calculator():
     st.title('Theoretische Ausbeute')
     # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
- 
+
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
     st.title('Konzentration berechnen')
@@ -62,47 +63,25 @@ def concentration_calculator():
         if concentration_unit == 'Mol pro Liter (mol/L)':
             concentration = substance_amount / solution_volume
             st.write('Die Konzentration beträgt:', concentration, 'mol/L')
-            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')  # H+ Konzentration
         elif concentration_unit == 'Gramm pro Liter (g/L)':
             # Hier benötigen Sie die molare Masse des gelösten Stoffs, um von Mol auf Gramm umzurechnen
             molar_mass = st.number_input('Molare Masse des gelösten Stoffs (g/mol)')
             if molar_mass != 0:
                 concentration = (substance_amount * molar_mass) / solution_volume
                 st.write('Die Konzentration beträgt:', concentration, 'g/L')
-                st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')  # H+ Konzentration
             else:
                 st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
     else:
         st.write('Die Stoffmenge und das Volumen der Lösung können nicht Null sein.')
- 
+
 # Funktion für den pH-Rechner
 def ph_calculator():
     st.title('pH-Rechner')
     st.markdown("""
-    Der pH-Wert ist ein Maß für die Säure oder Base einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist, und wird auf einer Skala von 0 bis 14 gemessen. Ein pH-Wert unter 7 zeigt eine saure Lösung an, während ein pH-Wert über 7 eine basische Lösung anzeigt. Ein pH-Wert von 7 ist neutral, was bedeutet, dass die Lösung weder sauer noch basisch ist.
+    Der pH-Wert ist ein Maß für die Wasserstoffionenkonzentration in einer Lösung. Er gibt an, wie sauer oder basisch eine Lösung ist. Geben Sie die Konzentration einer Säure oder Base in Mol pro Liter (mol/L) ein, um den pH-Wert zu berechnen.
     """)
-    solution_property = st.selectbox('Eigenschaft der Lösung', ['Konzentration einer Säure', 'Konzentration einer Base'])
+    solution_property = st.selectbox('Solution Properties wählen', ['Konzentration einer Säure', 'Konzentration einer Base'])
     if solution_property == 'Konzentration einer Säure':
-        acid = st.selectbox('Säure wählen', ['HCl', 'H2SO4', 'HNO3', 'H3PO4'])
-        concentration = st.number_input('Konzentration der Säure (mol/L)')
-        if concentration != 0:
-            ph = -1 * (st.math("log10({})".format(concentration)))
-            st.write('Der pH-Wert beträgt:', round(ph, 2))
-            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
-        else:
-            st.write('Bitte geben Sie die Konzentration der Säure ein.')
-    elif solution_property == 'Konzentration einer Base':
-        base = st.selectbox('Base wählen', ['NaOH', 'KOH', 'Ca(OH)2', 'NH3'])
-        concentration = st.number_input('Konzentration der Base (mol/L)')
-        if concentration != 0:
-            poh = -1 * (st.math("log10({})".format(concentration)))
-            ph = 14 - poh
-            st.write('Der pH-Wert beträgt:', round(ph, 2))
-            st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
-        else:
-            st.write('Bitte geben Sie die Konzentration der Base ein.')
- 
-# Aufruf der Homepage-Funktion, um die App zu starten
-homepage()
+        acid = st.selectbox('S
 
 
