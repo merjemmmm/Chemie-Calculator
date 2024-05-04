@@ -8,14 +8,12 @@ def homepage():
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
 
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'pH-Wert Rechner', 'Theoretische Ausbeute', 'Konzentration berechnen'])
+    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'Theoretische Ausbeute', 'Konzentration berechnen'])
 
     if selected_option == 'Stoffmenge ausrechnen':
         molar_calculator()
     elif selected_option == 'Gramm in mol umrechnen':
         gram_to_mol_calculator()
-    elif selected_option == 'pH-Wert Rechner':
-        ph_calculator()
     elif selected_option == 'Theoretische Ausbeute':
         yield_calculator()
     elif selected_option == 'Konzentration berechnen':
@@ -50,23 +48,33 @@ def gram_to_mol_calculator():
     result = mass / molar_mass
     st.write('Das Ergebnis beträgt:', result, 'mol')
 
-# Funktion für den pH-Wert-Rechner
-def ph_calculator():
-    st.title('pH-Wert Rechner')
+# Funktion für die Berechnung der theoretischen Ausbeute
+def yield_calculator():
+    st.title('Theoretische Ausbeute')
+    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+
+# Funktion für die Berechnung der Konzentration
+def concentration_calculator():
+    st.title('Konzentration berechnen')
     st.markdown("""
-    Der pH-Wert ist ein Maß für die Konzentration der Wasserstoffionen in einer Lösung. Er wird auf einer Skala von 0 bis 14 gemessen, wobei 7 neutral ist, Werte unter 7 als sauer gelten und Werte über 7 als basisch. Wählen Sie die Art der Lösung (sauer oder basisch), geben Sie die Konzentration der Säure oder Base ein und klicken Sie auf "pH-Wert berechnen".
+    Die Konzentration einer Lösung wird als das Verhältnis der Menge des gelösten Stoffs zur Menge der Lösung definiert. Geben Sie die Anzahl der Mole des gelösten Stoffs und das Volumen der Lösung ein, um die Konzentration zu berechnen.
     """)
+
+    moles = st.number_input('Anzahl der Mole')
+    volume = st.number_input('Volumen der Lösung (in Liter)')
     
-    solution_type = st.radio('Art der Lösung', ['Sauer', 'Basisch'])
+    if moles != 0 and volume != 0:  # Überprüfen, ob die Anzahl der Mole und das Volumen nicht Null sind
+        concentration = moles / volume
+        st.write('Die Konzentration beträgt:', concentration, 'mol/L')
+    else:
+        st.write('Die Anzahl der Mole und das Volumen können nicht Null sein.')
 
-    if solution_type == 'Sauer':
-        acid_type = st.selectbox('Wählen Sie die Art der Säure', ['HCl', 'H2SO4', 'HNO3'])  # Hier können die wichtigsten Säuren hinzugefügt werden
-        acid_concentration = st.number_input('Konzentration der Säure (in mol/L)')
+# Hauptfunktion für die Streamlit-Anwendung
+def main():
+    homepage()
 
-        if acid_concentration != 0:  # Überprüfen, ob die Konzentration der Säure nicht Null ist
-            if acid_type == 'HCl':
-                h_concentration = acid_concentration
-            elif acid_type == 'H2SO4':
-                h_concentration = 2 * acid_concentration
-            elif acid_type == 'HNO3':
-                h_concentration
+# Ausführen der Hauptfunktion
+if __name__ == "__main__":
+    main()
+
+
