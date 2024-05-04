@@ -48,7 +48,26 @@ def gram_to_mol_calculator():
 # Funktion für die Berechnung der theoretischen Ausbeute
 def yield_calculator():
     st.title('Theoretische Ausbeute')
-    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+    st.markdown("""
+    Die theoretische Ausbeute ist die maximale Menge eines Produkts, die bei einer Reaktion erhalten werden kann, wenn alle Reaktanten vollständig in das Produkt umgewandelt werden, unter der Annahme, dass keine Nebenreaktionen oder Produktverluste auftreten. Geben Sie die Anfangsmenge der Reaktanten und die molaren Verhältnisse der Reaktanten und Produkte ein, um die theoretische Ausbeute zu berechnen.
+    """)
+    reactant_names = st.text_input('Namen der Reaktanten (durch Komma getrennt)')
+    reactant_amounts = st.text_input('Mengen der Reaktanten (in mol, durch Komma getrennt)')
+    product_names = st.text_input('Namen der Produkte (durch Komma getrennt)')
+    product_coefficients = st.text_input('Stöchiometrische Koeffizienten der Produkte (durch Komma getrennt)')
+    if reactant_names and reactant_amounts and product_names and product_coefficients:
+        reactant_names_list = [x.strip() for x in reactant_names.split(',')]
+        reactant_amounts_list = [float(x.strip()) for x in reactant_amounts.split(',')]
+        product_names_list = [x.strip() for x in product_names.split(',')]
+        product_coefficients_list = [int(x.strip()) for x in product_coefficients.split(',')]
+        
+        # Berechnung der theoretischen Ausbeute
+        min_reactant_amount = min(reactant_amounts_list)
+        theoretical_yield = min_reactant_amount * min(product_coefficients_list)
+        
+        st.write('Die theoretische Ausbeute beträgt:', theoretical_yield, 'mol')
+    else:
+        st.write('Bitte geben Sie alle erforderlichen Informationen ein.')
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
@@ -103,4 +122,5 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
+
 
