@@ -47,8 +47,22 @@ def gram_to_mol_calculator():
 
 # Funktion für die Berechnung der theoretischen Ausbeute
 def yield_calculator():
-    st.title('Theoretische Ausbeute')
-    # Hier kann die Logik für die Berechnung der theoretischen Ausbeute implementiert werden
+    st.title('Theoretische Ausbeute Rechner')
+    st.write('Was versteht man unter theoretischer Ausbeute? Das ist die Menge eines Produkts, die entstehen würde, wenn deine Reaktion zu 100% effizient wäre.')
+    st.write('Die Formel zur Berechnung der theoretischen Ausbeute:')
+    st.latex(r'm_{\text{Produkt}} = m_{\text{mol, Produkt}} \times n_{\text{lim}} \times c')
+ 
+    st.write('Bitte geben Sie die folgenden Informationen ein:')
+    # Eingabefelder für Masse, molare Masse, Stoffmenge und Stöchiometrie
+    mass_product = st.number_input('Masse des Produkts (g)', min_value=0.0, step=0.01)
+    molar_mass_product = st.number_input('Molare Masse des Produkts (g/mol)', min_value=0.0, step=0.01)
+    stoichiometry = st.number_input('Stöchiometrie des Produkts', min_value=0.0, step=1)
+    stoffmenge_limiting = st.number_input('Stoffmenge des limitierenden Reagenzes (mol)', min_value=0.0, step=0.01)
+ 
+    # Berechnung der theoretischen Ausbeute
+    theoretical_yield = mass_product / (molar_mass_product * stoichiometry * stoffmenge_limiting)
+ 
+    st.write('Die theoretische Ausbeute beträgt:', theoretical_yield, 'g')
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
@@ -103,25 +117,3 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
- 
-# Funktion für die Berechnung der theoretischen Ausbeute
-def yield_calculator():
-    st.title('Theoretische Ausbeute Rechner')
-    st.write('Was versteht man unter theoretischer Ausbeute? Das ist die Menge eines Produkts, die entstehen würde, wenn deine Reaktion zu 100% effizient wäre.')
-    st.write('Die Formel zur Berechnung der theoretischen Ausbeute:')
-    st.latex(r'm_{\text{Produkt}} = m_{\text{mol, Produkt}} \times n_{\text{lim}} \times c')
- 
-    st.write('Bitte geben Sie die folgenden Informationen ein:')
-    # Eingabefelder für Masse, molare Masse, Stoffmenge und Stöchiometrie
-    mass_product = st.number_input('Masse des Produkts (g)', min_value=0.0, step=0.01)
-    molar_mass_product = st.number_input('Molare Masse des Produkts (g/mol)', min_value=0.0, step=0.01)
-    stoichiometry = st.number_input('Stöchiometrie des Produkts', min_value=0.0, step=1)
-    stoffmenge_limiting = st.number_input('Stoffmenge des limitierenden Reagenzes (mol)', min_value=0.0, step=0.01)
- 
-    # Berechnung der theoretischen Ausbeute
-    theoretical_yield = mass_product / (molar_mass_product * stoichiometry * stoffmenge_limiting)
- 
-    st.write('Die theoretische Ausbeute beträgt:', theoretical_yield, 'g')
- 
-# Aufruf der homepage-Funktion, um die App zu starten
-yield_calculator()
