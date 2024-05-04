@@ -3,51 +3,8 @@ import streamlit as st
 # Funktion für die Startseite der App
 def homepage():
     st.title('Herzlich willkommen auf unserer App - Chemie Calculator')
+    st.subheader("🧪 Chemie Calculator")
     st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie Labor zu berechnen.')
-
-    # Balken für Log-in und Sign-up
-    login = st.button('Log-in')
-    signup = st.button('Sign-up')
-
-    if login:
-        login_page()
-    elif signup:
-        signup_page()
-
-# Funktion für die Log-in-Seite
-def login_page():
-    st.title('Log-in')
-    username = st.text_input('Benutzername')
-    password = st.text_input('Passwort', type='password')
-
-    # Hier würde normalerweise die Log-in-Logik eingefügt werden
-    # Für dieses Beispiel lassen wir es jedoch weg
-
-    if st.button('Einloggen'):
-        st.success('Erfolgreich eingeloggt!')
-        home_page()
-
-# Funktion für die Sign-up-Seite
-def signup_page():
-    st.title('Sign-up')
-    gender = st.selectbox('Anrede', ['Männlich', 'Weiblich'])
-    first_name = st.text_input('Vorname')
-    last_name = st.text_input('Nachname')
-    email = st.text_input('E-Mail')
-    education = st.text_input('Ausbildung')
-    username = st.text_input('Benutzername')
-    password = st.text_input('Passwort', type='password')
-
-    # Hier würde normalerweise die Sign-up-Logik eingefügt werden
-    # Für dieses Beispiel lassen wir es jedoch weg
-
-    if st.button('Account erstellen'):
-        st.success('Account erfolgreich erstellt!')
-        home_page()
-
-# Funktion für den Homebildschirm
-def home_page():
-    st.title('Homebildschirm')
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
 
     # Balken für verschiedene Funktionen
@@ -65,6 +22,10 @@ def home_page():
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
     st.title('Stoffmenge ausrechnen')
+    st.markdown("""
+    Die Stoffmenge (auch Mol genannt) ist eine grundlegende Größe in der Chemie, die die Anzahl der Teilchen in einer Substanz angibt. Ein Mol entspricht etwa 6,022 x 10^23 Teilchen, was als Avogadro-Konstante bekannt ist. Um die Stoffmenge auszurechnen, müssen Sie die Masse der Substanz und ihre molare Masse kennen. Wählen Sie die Einheit für die Masse und geben Sie dann die Masse und die molare Masse ein, um die Stoffmenge zu berechnen.
+    """)
+
     mass_unit = st.selectbox('Einheit für Masse', ['Gramm', 'Milligramm'])
     mass = st.number_input('Masse')
     molar_mass = st.number_input('Molare Masse (g/mol)')
