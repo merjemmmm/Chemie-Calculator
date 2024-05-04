@@ -72,8 +72,7 @@ def concentration_calculator():
                 st.write('Bitte geben Sie die molare Masse des gelösten Stoffs ein.')
     else:
         st.write('Die Stoffmenge und das Volumen der Lösung können nicht Null sein.')
- 
-[18:32] Omeragic Merjem (omeramer)
+
 # Funktion für den pH-Rechner
 
 def ph_calculator():
