@@ -100,4 +100,3 @@ def ph_calculator():
  
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
-
