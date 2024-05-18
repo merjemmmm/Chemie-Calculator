@@ -68,16 +68,16 @@ def reaction_enthalpy_calculator():
     """)
     substance1 = st.text_input('Name des ersten Stoffes')
     enthalpy1 = st.number_input('Enthalpie des ersten Stoffes (kJ/mol)')
-    substance2 = st.text_input('Name des zweiten Stoffes')
+    substance2 = st
+
+.text_input('Name des zweiten Stoffes')
     enthalpy2 = st.number_input('Enthalpie des zweiten Stoffes (kJ/mol)')
     reaction_type = st.radio('Art der Reaktion', ['Exotherm', 'Endotherm'])
     if reaction_type == 'Exotherm':
         reaction_enthalpy = enthalpy1 + enthalpy2
     else:
         reaction_enthalpy = enthalpy1 - enthalpy2
-    st.write('Die Reaktionsenthalpie beträgt:', reaction
-
-_enthalpy, 'kJ/mol')
+    st.write('Die Reaktionsenthalpie beträgt:', reaction_enthalpy, 'kJ/mol')
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
@@ -136,5 +136,3 @@ homepage()
 # Verbindung zur Datenbank schließen
 conn.close()
 ```
-
-
