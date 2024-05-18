@@ -11,12 +11,32 @@ c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS user_inputs
              (function TEXT, input_value REAL)''')
 
+# CSS für Hintergrundfarbe und Emoji
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: #d0f0c0;
+    }
+    .sidebar .sidebar-content {
+        background: #d0f0c0;
+    }
+    .stTextInput, .stNumberInput, .stSelectbox, .stRadio {
+        background-color: #e5ffcc;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Funktion für die Startseite der App
 def homepage():
     st.title('Herzlich Willkommen auf unserer App - Chemie Calculator')
     st.subheader("🧪 Chemie Calculator")
     st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie Labor zu berechnen.')
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
+    st.markdown('<div style="font-size: 24px;">🧪🧪🧪</div>', unsafe_allow_html=True)  # Messkolben-Emojis
+
     # Balken für verschiedene Funktionen
     selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'Reaktionsenthalpie berechnen', 'Konzentration berechnen', 'pH-Rechner'])
     if selected_option == 'Stoffmenge ausrechnen':
