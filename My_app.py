@@ -1,5 +1,17 @@
+Klar, hier ist der ergänzte Code, der die Benutzereingaben verfolgt und in einer Datenbank speichert:
+
+```python
 import streamlit as st
 import math
+import sqlite3
+
+# Verbindung zur SQLite-Datenbank herstellen
+conn = sqlite3.connect('user_inputs.db')
+c = conn.cursor()
+
+# Tabelle erstellen, falls sie nicht existiert
+c.execute('''CREATE TABLE IF NOT EXISTS user_inputs
+             (function TEXT, input_value REAL)''')
 
 # Funktion für die Startseite der App
 def homepage():
@@ -19,6 +31,9 @@ def homepage():
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
         ph_calculator()
+    # Benutzereingabe in Datenbank speichern
+    c.execute("INSERT INTO user_inputs (function, input_value) VALUES (?, ?)", (selected_option, 1))
+    conn.commit()
 
 # Funktion für den Stoffmengenrechner
 def molar_calculator():
@@ -69,7 +84,9 @@ def reaction_enthalpy_calculator():
 def concentration_calculator():
     st.title('Konzentration berechnen')
     st.markdown("""
-    Die Konzentration einer Lösung gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
+    Die Konzentration einer Lösung
+
+ gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
     """)
     substance_amount = st.number_input('Stoffmenge (in Mol)')
     solution_volume = st.number_input('Volumen der Lösung (in Litern)')
@@ -118,4 +135,10 @@ def ph_calculator():
 
 # Aufruf der Homepage-Funktion, um die App zu starten
 homepage()
+
+# Verbindung zur Datenbank schließen
+conn.close()
+```
+
+Dieser Code ergänzt die Funktionalität Ihrer Streamlit-App, um die Benutzereingaben in einer SQLite-Datenbank zu verfolgen.
 
