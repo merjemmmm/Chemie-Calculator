@@ -2,6 +2,7 @@ import streamlit as st
 import math
 import sqlite3
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Verbindung zur SQLite-Datenbank herstellen
 conn = sqlite3.connect('user_inputs.db')
@@ -136,6 +137,12 @@ def visualize_data():
     # Daten aus der Datenbank abrufen
     data = pd.read_sql_query("SELECT * FROM user_inputs", conn)
     st.write(data)
+
+    # Daten für das Balkendiagramm vorbereiten
+    function_counts = data['function'].value_counts()
+
+    # Balkendiagramm erstellen
+    st.bar_chart(function_counts)
 
 # Navigation zwischen Startseite und Datenvisualisierung
 page = st.sidebar.selectbox('Seiten', ['Startseite', 'Datenvisualisierung'])
