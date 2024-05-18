@@ -75,15 +75,15 @@ def reaction_enthalpy_calculator():
         reaction_enthalpy = enthalpy1 + enthalpy2
     else:
         reaction_enthalpy = enthalpy1 - enthalpy2
-    st.write('Die Reaktionsenthalpie beträgt:', reaction_enthalpy, 'kJ/mol')
+    st.write('Die Reaktionsenthalpie beträgt:', reaction
+
+_enthalpy, 'kJ/mol')
 
 # Funktion für die Berechnung der Konzentration
 def concentration_calculator():
     st.title('Konzentration berechnen')
     st.markdown("""
-    Die Konzentration einer Lösung
-
- gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
+    Die Konzentration einer Lösung gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
     """)
     substance_amount = st.number_input('Stoffmenge (in Mol)')
     solution_volume = st.number_input('Volumen der Lösung (in Litern)')
