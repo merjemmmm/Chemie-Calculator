@@ -1,6 +1,3 @@
-Klar, hier ist der ergänzte Code, der die Benutzereingaben verfolgt und in einer Datenbank speichert:
-
-```python
 import streamlit as st
 import math
 import sqlite3
@@ -140,5 +137,4 @@ homepage()
 conn.close()
 ```
 
-Dieser Code ergänzt die Funktionalität Ihrer Streamlit-App, um die Benutzereingaben in einer SQLite-Datenbank zu verfolgen.
 
