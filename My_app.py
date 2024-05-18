@@ -2,7 +2,6 @@ import streamlit as st
 import math
 import sqlite3
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Verbindung zur SQLite-Datenbank herstellen
 conn = sqlite3.connect('user_inputs.db')
@@ -54,6 +53,9 @@ def molar_calculator():
 # Funktion für den Gramm-zu-Mol-Umrechner
 def gram_to_mol_calculator():
     st.title('Gramm in mol umrechnen')
+    st.markdown("""
+    Diese Funktion ermöglicht die Umrechnung einer Masse in Gramm in die entsprechende Stoffmenge in Mol. Geben Sie die Masse und die molare Masse des Stoffes ein, um die Stoffmenge zu berechnen.
+    """)
     mass = st.number_input('Masse')
     molar_mass = st.number_input('Molare Masse (g/mol)')
     if molar_mass != 0:  # Überprüfen, ob die molare Masse nicht Null ist
