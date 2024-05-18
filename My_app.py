@@ -12,7 +12,7 @@ c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS user_inputs
              (function TEXT, input_value REAL)''')
 
-# CSS für Hintergrundfarbe und Emoji
+# CSS und JavaScript für Glitzereffekt
 st.markdown(
     """
     <style>
@@ -24,6 +24,42 @@ st.markdown(
     }
     .stTextInput, .stNumberInput, .stSelectbox, .stRadio {
         background-color: #e5ffcc;
+    }
+    </style>
+    <script>
+    document.addEventListener('mousemove', function(e) {
+        let body = document.querySelector('body');
+        let sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = e.pageX + 'px';
+        sparkle.style.top = e.pageY + 'px';
+        body.appendChild(sparkle);
+        setTimeout(function() {
+            sparkle.remove();
+        }, 1000);
+    });
+    </script>
+    <style>
+    .sparkle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background-color: yellow;
+        border-radius: 50%;
+        box-shadow: 0 0 10px yellow;
+        pointer-events: none;
+        z-index: 9999;
+        animation: sparkle-animation 1s linear infinite;
+    }
+    @keyframes sparkle-animation {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(2);
+            opacity: 0;
+        }
     }
     </style>
     """,
@@ -155,7 +191,7 @@ def ph_calculator():
 
 # Zweite Seite für die Datenvisualisierung
 def visualize_data():
-    st.title('Datenvisualisierung')
+    st.title('🧪 Datenvisualisierung')
     st.write('Hier werden die Benutzereingaben visualisiert.')
     # Daten aus der Datenbank abrufen
     data = pd.read_sql_query("SELECT * FROM user_inputs", conn)
