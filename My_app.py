@@ -2,6 +2,7 @@ import streamlit as st
 import math
 import sqlite3
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Verbindung zur SQLite-Datenbank herstellen
 conn = sqlite3.connect('user_inputs.db')
@@ -33,7 +34,7 @@ st.markdown(
 def homepage():
     st.title('Herzlich Willkommen auf unserer App - Chemie Calculator')
     st.subheader("🧪 Chemie Calculator")
-    st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie Labor zu berechnen.')
+    st.write('Diese App bietet Ihnen die Möglichkeit, häufig verwendete Aufgaben im Chemie-Labor zu berechnen. Egal, ob Sie die Stoffmenge, die Reaktionsenthalpie oder die Konzentration berechnen möchten, unsere App hilft Ihnen dabei.')
     st.write('Wählen Sie eine Funktion aus und klicken Sie darauf.')
     st.markdown('<div style="font-size: 24px;">🧪🧪🧪</div>', unsafe_allow_html=True)  # Messkolben-Emojis
 
@@ -164,7 +165,12 @@ def visualize_data():
     function_counts = data['function'].value_counts()
 
     # Balkendiagramm erstellen
-    st.bar_chart(function_counts)
+    fig, ax = plt.subplots()
+    function_counts.plot(kind='bar', color='green', ax=ax)
+    ax.set_title('Benutzereingaben')
+    ax.set_xlabel('Funktion')
+    ax.set_ylabel('Anzahl der Eingaben')
+    st.pyplot(fig)
 
 # Navigation zwischen Startseite und Datenvisualisierung
 page = st.sidebar.selectbox('Seiten', ['Startseite', 'Datenvisualisierung'])
