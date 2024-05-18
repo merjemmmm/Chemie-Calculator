@@ -1,6 +1,7 @@
 import streamlit as st
 import math
 import sqlite3
+import pandas as pd
 
 # Verbindung zur SQLite-Datenbank herstellen
 conn = sqlite3.connect('user_inputs.db')
@@ -81,9 +82,7 @@ def reaction_enthalpy_calculator():
 def concentration_calculator():
     st.title('Konzentration berechnen')
     st.markdown("""
-    Die Konzentration einer Lösung
-
- gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
+    Die Konzentration einer Lösung gibt an, wie viel von einem Stoff in einer gegebenen Menge an Lösungsmittel enthalten ist. Die Einheiten für die Konzentration können Mol pro Liter (mol/L) oder Gramm pro Liter (g/L) sein. Geben Sie die Stoffmenge (in Mol), das Volumen der Lösung (in Litern) und die gewünschte Einheit für die Konzentration ein, um die Konzentration zu berechnen.
     """)
     substance_amount = st.number_input('Stoffmenge (in Mol)')
     solution_volume = st.number_input('Volumen der Lösung (in Litern)')
@@ -130,8 +129,20 @@ def ph_calculator():
         else:
             st.write('Bitte geben Sie die Konzentration der Base ein.')
 
-# Aufruf der Homepage-Funktion, um die App zu starten
-homepage()
+# Zweite Seite für die Datenvisualisierung
+def visualize_data():
+    st.title('Datenvisualisierung')
+    st.write('Hier werden die Benutzereingaben visualisiert.')
+    # Daten aus der Datenbank abrufen
+    data = pd.read_sql_query("SELECT * FROM user_inputs", conn)
+    st.write(data)
+
+# Navigation zwischen Startseite und Datenvisualisierung
+page = st.sidebar.selectbox('Seiten', ['Startseite', 'Datenvisualisierung'])
+if page == 'Startseite':
+    homepage()
+elif page == 'Datenvisualisierung':
+    visualize_data()
 
 # Verbindung zur Datenbank schließen
 conn.close()
