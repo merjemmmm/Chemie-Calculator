@@ -3,6 +3,7 @@ import math
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
+import re
 
 # Verbindung zur SQLite-Datenbank herstellen
 conn = sqlite3.connect('user_inputs.db')
@@ -39,10 +40,16 @@ def homepage():
     st.markdown('<div style="font-size: 24px;">🧪🧪🧪</div>', unsafe_allow_html=True)  # Messkolben-Emojis
 
     # Balken für verschiedene Funktionen
-    selected_option = st.selectbox('Funktion wählen', ['Stoffmenge ausrechnen', 'Gramm in mol umrechnen', 'Reaktionsenthalpie berechnen', 'Konzentration berechnen', 'pH-Rechner'])
+    selected_option = st.selectbox('Funktion wählen', [
+        'Stoffmenge ausrechnen', 
+        'Umwandlung von Mole in Gramm und Gramm in Mole', 
+        'Reaktionsenthalpie berechnen', 
+        'Konzentration berechnen', 
+        'pH-Rechner'
+    ])
     if selected_option == 'Stoffmenge ausrechnen':
         molar_calculator()
-    elif selected_option == 'Gramm in mol umrechnen':
+    elif selected_option == 'Umwandlung von Mole in Gramm und Gramm in Mole':
         gram_to_mol_calculator()
     elif selected_option == 'Reaktionsenthalpie berechnen':
         reaction_enthalpy_calculator()
@@ -107,7 +114,6 @@ def gram_to_mol_calculator():
     }
     
     def calculate_molar_mass(formula):
-        import re
         elements = re.findall(r'([A-Z][a-z]*)(\d*)', formula)
         molar_mass = 0
         details = []
