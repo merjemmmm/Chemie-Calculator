@@ -68,7 +68,7 @@ def gram_to_mol_calculator():
     Diese Funktion ermöglicht die Umrechnung einer Masse in Gramm in die entsprechende Stoffmenge in Mol und umgekehrt. Geben Sie die notwendigen Werte ein und wählen Sie die gewünschte Umrechnung.
     """)
     
-    st.write("### Substanzformel")
+    st.write("### Substanzformel (z.B. H₂O)")
     formula = st.text_input("Substanzformel", "H2O")
     
     convert_option = st.radio("Umwandeln", ("Gramm in Mole", "Mole in Gramm"))
