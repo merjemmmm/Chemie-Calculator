@@ -125,6 +125,8 @@ def gram_to_mol_calculator():
     
     if formula:
         molar_mass, details = calculate_molar_mass(formula)
+        st.write("### Eingabewerte")
+        mol = st.number_input("Menge der Substanz in Mole")
         st.write(f"Molare Masse von {formula} = {molar_mass} g/mol")
         st.write(f"Details: {details}")
     
@@ -136,8 +138,6 @@ def gram_to_mol_calculator():
             st.write("### Ergebnis")
             st.write(f"Die Stoffmenge beträgt: {mol} mol")
     else:
-        st.write("### Eingabewerte")
-        mol = st.number_input("Menge der Substanz in Mole")
         if mol != 0 and molar_mass != 0:
             mass = round(mol * molar_mass, precision)
             st.write("### Ergebnis")
