@@ -73,17 +73,36 @@ def molar_calculator():
 
 # Funktion für den Gramm-zu-Mol-Umrechner
 def gram_to_mol_calculator():
-    st.title('Gramm in mol umrechnen')
+    st.title('Umwandlung von Mole in Gramm und Gramm in Mole')
     st.markdown("""
-    Diese Funktion ermöglicht die Umrechnung einer Masse in Gramm in die entsprechende Stoffmenge in Mol. Geben Sie die Masse und die molare Masse des Stoffes ein, um die Stoffmenge zu berechnen.
+    Diese Funktion ermöglicht die Umrechnung einer Masse in Gramm in die entsprechende Stoffmenge in Mol und umgekehrt. Geben Sie die notwendigen Werte ein und wählen Sie die gewünschte Umrechnung.
     """)
-    mass = st.number_input('Masse (in Gramm)')
-    molar_mass = st.number_input('Molare Masse (g/mol)')
-    if mass != 0 and molar_mass != 0:  # Überprüfen, ob die Masse und die molare Masse nicht Null sind
-        result = mass / molar_mass
-        st.write('Die Stoffmenge beträgt:', result, 'mol')
+    
+    st.write("### Substanzformel")
+    formula = st.text_input("Substanzformel", "H2O")
+    
+    convert_option = st.radio("Umwandeln", ("Gramm in Mole", "Mole in Gramm"))
+    precision = st.slider("Zahlen nach dem Dezimalpunkt", 0, 5, 3)
+    
+    if convert_option == "Gramm in Mole":
+        st.write("### Eingabewerte")
+        mass = st.number_input("Masse der Substanz in Gramm")
+        molar_mass = st.number_input("Molmasse der Substanz (g/mol)")
+        if mass != 0 and molar_mass != 0:
+            mol = round(mass / molar_mass, precision)
+            st.write("### Ergebnis")
+            st.write(f"Die Stoffmenge beträgt: {mol} mol")
     else:
-        st.write('Die Masse und die molare Masse können nicht Null sein.')
+        st.write("### Eingabewerte")
+        mol = st.number_input("Menge der Substanz in Mole")
+        molar_mass = st.number_input("Molmasse der Substanz (g/mol)")
+        if mol != 0 and molar_mass != 0:
+            mass = round(mol * molar_mass, precision)
+            st.write("### Ergebnis")
+            st.write(f"Die Masse der Substanz beträgt: {mass} g")
+        
+    st.write("### Details der molaren Masse")
+    st.write("Molare Masse Berechnung hier einfügen...")  # Hier können Sie eine detaillierte Berechnung der molaren Masse anzeigen
 
 # Funktion für die Berechnung der Reaktionsenthalpie
 def reaction_enthalpy_calculator():
