@@ -41,15 +41,13 @@ def homepage():
 
     # Balken für verschiedene Funktionen
     selected_option = st.selectbox('Funktion wählen', [
-        'Stoffmenge ausrechnen', 
         'Umwandlung von Mole in Gramm und Gramm in Mole', 
         'Reaktionsenthalpie berechnen', 
         'Konzentration berechnen', 
-        'pH-Rechner'
+        'pH-Rechner', 
+        'Ideale Gasgleichung'
     ])
-    if selected_option == 'Stoffmenge ausrechnen':
-        molar_calculator()
-    elif selected_option == 'Umwandlung von Mole in Gramm und Gramm in Mole':
+    if selected_option == 'Umwandlung von Mole in Gramm und Gramm in Mole':
         gram_to_mol_calculator()
     elif selected_option == 'Reaktionsenthalpie berechnen':
         reaction_enthalpy_calculator()
@@ -57,28 +55,13 @@ def homepage():
         concentration_calculator()
     elif selected_option == 'pH-Rechner':
         ph_calculator()
+    elif selected_option == 'Ideale Gasgleichung':
+        ideal_gas_law_calculator()
     # Benutzereingabe in Datenbank speichern
     c.execute("INSERT INTO user_inputs (function, input_value) VALUES (?, ?)", (selected_option, 1))
     conn.commit()
 
-# Funktion für den Stoffmengenrechner
-def molar_calculator():
-    st.title('Stoffmenge ausrechnen')
-    st.markdown("""
-    Die Stoffmenge (auch Mol genannt) ist eine grundlegende Größe in der Chemie, die die Anzahl der Teilchen in einer Substanz angibt. Ein Mol entspricht etwa 6,022 x 10^23 Teilchen, was als Avogadro-Konstante bekannt ist. Um die Stoffmenge auszurechnen, müssen Sie die Masse der Substanz und ihre molare Masse kennen. Wählen Sie die Einheit für die Masse und geben Sie dann die Masse und die molare Masse ein, um die Stoffmenge zu berechnen.
-    """)
-    mass_unit = st.selectbox('Einheit für Masse', ['Gramm', 'Milligramm'])
-    mass = st.number_input('Masse')
-    molar_mass = st.number_input('Molare Masse (g/mol)')
-    if mass != 0 and molar_mass != 0:  # Überprüfen, ob die Masse und die molare Masse nicht Null sind
-        if mass_unit == 'Milligramm':
-            mass /= 1000  # Umrechnung von Milligramm in Gramm
-        result = mass / molar_mass
-        st.write('Das Ergebnis beträgt:', result, 'mol')
-    else:
-        st.write('Die Masse und die molare Masse können nicht Null sein.')
-
-# Funktion für den Gramm-zu-Mol-Umrechner
+# Funktion für die Umwandlung von Mole in Gramm und Gramm in Mole
 def gram_to_mol_calculator():
     st.title('Umwandlung von Mole in Gramm und Gramm in Mole')
     st.markdown("""
@@ -91,6 +74,12 @@ def gram_to_mol_calculator():
     convert_option = st.radio("Umwandeln", ("Gramm in Mole", "Mole in Gramm"))
     precision = st.slider("Zahlen nach dem Dezimalpunkt", 0, 5, 3)
     
+    st.write("### Eingabewerte")
+    if convert_option == "Gramm in Mole":
+        mass = st.number_input("Masse der Substanz in Gramm")
+    else:
+        mol = st.number_input("Menge der Substanz in Mole")
+
     # Einfache Periodensystem-Daten
     periodic_table = {
         "H": 1.008, "He": 4.0026, "Li": 6.94, "Be": 9.0122, "B": 10.81, "C": 12.011,
@@ -125,24 +114,21 @@ def gram_to_mol_calculator():
     
     if formula:
         molar_mass, details = calculate_molar_mass(formula)
-        st.write(f"Molare Masse von {formula} = {molar_mass} g/mol")
-        st.write(f"Details: {details}")
-    
-    if convert_option == "Gramm in Mole":
-        st.write("### Eingabewerte")
-        mass = st.number_input("Masse der Substanz in Gramm")
-        if mass != 0 and molar_mass != 0:
-            mol = round(mass / molar_mass, precision)
-            st.write("### Ergebnis")
-            st.write(f"Die Stoffmenge beträgt: {mol} mol")
-    else:
-        st.write("### Eingabewerte")
-        mol = st.number_input("Menge der Substanz in Mole")
-        if mol != 0 and molar_mass != 0:
-            mass = round(mol * molar_mass, precision)
-            st.write("### Ergebnis")
-            st.write(f"Die Masse der Substanz beträgt: {mass} g")
-    
+        if convert_option == "Gramm in Mole":
+            st.write(f"Molare Masse von {formula} = {molar_mass} g/mol")
+            st.write(f"Details: {details}")
+            if mass != 0 and molar_mass != 0:
+                mol = round(mass / molar_mass, precision)
+                st.write("### Ergebnis")
+                st.write(f"Die Stoffmenge beträgt: {mol} mol")
+        else:
+            if mol != 0 and molar_mass != 0:
+                mass = round(mol * molar_mass, precision)
+                st.write("### Ergebnis")
+                st.write(f"Die Masse der Substanz beträgt: {mass} g")
+            st.write(f"Molare Masse von {formula} = {molar_mass} g/mol")
+            st.write(f"Details: {details}")
+
 # Funktion für die Berechnung der Reaktionsenthalpie
 def reaction_enthalpy_calculator():
     st.title('Reaktionsenthalpie berechnen')
@@ -210,6 +196,37 @@ def ph_calculator():
             st.write('Die Konzentration der H+ beträgt:', concentration, 'mol/L')
         else:
             st.write('Bitte geben Sie die Konzentration der Base ein.')
+
+# Funktion für die ideale Gasgleichung
+def ideal_gas_law_calculator():
+    st.title('Ideale Gasgleichung')
+    st.markdown("""
+    Ein Rechner für das Verhalten von idealen Gasen (Gasgesetz). Bitte geben Sie drei Werte ein, der vierte wird errechnet. Welchen Wert Sie freilassen, bleibt Ihnen überlassen.
+    
+    Formel: p V = n R T
+    R = molare Gaskonstante = 0,08314472 (bar*L)/(mol*K)
+    L = Liter, K = Kelvin
+    """)
+    R = 0.08314472  # (bar*L)/(mol*K)
+    
+    p = st.number_input('p Druck in bar', value=0.0)
+    V = st.number_input('V Volumen in L', value=0.0)
+    n = st.number_input('n Stoffmenge in mol', value=0.0)
+    T = st.number_input('T Temperatur in K', value=0.0)
+    
+    if st.button('Berechnen'):
+        if p == 0.0:
+            p = (n * R * T) / V
+            st.write(f'Der berechnete Druck beträgt: {p} bar')
+        elif V == 0.0:
+            V = (n * R * T) / p
+            st.write(f'Das berechnete Volumen beträgt: {V} L')
+        elif n == 0.0:
+            n = (p * V) / (R * T)
+            st.write(f'Die berechnete Stoffmenge beträgt: {n} mol')
+        elif T == 0.0:
+            T = (p * V) / (n * R)
+            st.write(f'Die berechnete Temperatur beträgt: {T} K')
 
 # Zweite Seite für die Datenvisualisierung
 def visualize_data():
