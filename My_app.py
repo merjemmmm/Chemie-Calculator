@@ -77,13 +77,13 @@ def gram_to_mol_calculator():
     st.markdown("""
     Diese Funktion ermöglicht die Umrechnung einer Masse in Gramm in die entsprechende Stoffmenge in Mol. Geben Sie die Masse und die molare Masse des Stoffes ein, um die Stoffmenge zu berechnen.
     """)
-    mass = st.number_input('Masse')
+    mass = st.number_input('Masse (in Gramm)')
     molar_mass = st.number_input('Molare Masse (g/mol)')
-    if molar_mass != 0:  # Überprüfen, ob die molare Masse nicht Null ist
+    if mass != 0 and molar_mass != 0:  # Überprüfen, ob die Masse und die molare Masse nicht Null sind
         result = mass / molar_mass
-        st.write('Das Ergebnis beträgt:', result, 'mol')
+        st.write('Die Stoffmenge beträgt:', result, 'mol')
     else:
-        st.write('Die molare Masse kann nicht Null sein.')
+        st.write('Die Masse und die molare Masse können nicht Null sein.')
 
 # Funktion für die Berechnung der Reaktionsenthalpie
 def reaction_enthalpy_calculator():
